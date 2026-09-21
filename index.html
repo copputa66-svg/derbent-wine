@@ -742,7 +742,6 @@
   }
   .btn-confirm:active, .btn-cancel:active, .btn-danger:active { transform: scale(0.98); }
 
-  /* ==== КНОПКИ В МОДАЛКЕ НАСТРОЕК ==== */
   .settings-actions {
     display: flex;
     flex-direction: column;
@@ -769,12 +768,8 @@
     background: rgba(199,125,255,0.15);
     transform: scale(0.98);
   }
-  .settings-action.danger {
-    border-color: rgba(255,100,100,0.3);
-  }
-  .settings-action.danger:active {
-    background: rgba(255,80,80,0.15);
-  }
+  .settings-action.danger { border-color: rgba(255,100,100,0.3); }
+  .settings-action.danger:active { background: rgba(255,80,80,0.15); }
   .settings-action-icon {
     width: 42px; height: 42px;
     border-radius: 12px;
@@ -956,6 +951,39 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  /* ==== ИНДИКАТОР СВАЙПА НАЗАД ==== */
+  .edge-arrow {
+    position: fixed;
+    left: 6px;
+    top: 50%;
+    width: 44px;
+    height: 68px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1;
+    padding-bottom: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(-70px) scale(0.8);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 9999;
+    box-shadow: 0 8px 24px rgba(199,125,255,0.7), 0 0 40px rgba(199,125,255,0.4);
+    will-change: transform, opacity;
+  }
+  .edge-arrow.visible {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  .edge-arrow.hover {
+    transform: translateY(-50%) translateX(10px) scale(1.12);
+  }
+
   .screen { display: none; }
   .screen.active { display: block; }
 
@@ -1075,7 +1103,7 @@
   </div>
 </div>
 
-<!-- МОДАЛКА: НАСТРОЙКИ / РЕЗЕРВНОЕ КОПИРОВАНИЕ -->
+<!-- МОДАЛКА: НАСТРОЙКИ -->
 <div class="modal-overlay" id="modal-settings">
   <div class="modal">
     <h2>⚙️ Настройки и резервные копии</h2>
@@ -1238,6 +1266,9 @@
   </div>
 </div>
 
+<!-- ИНДИКАТОР СВАЙПА НАЗАД -->
+<div class="edge-arrow" id="edge-arrow">‹</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1295,11 +1326,166 @@
     }[c]));
   }
 
+  // =========================================================
+  // ============ СИСТЕМА ВОЗВРАТА (СВАЙП + КНОПКА) ==========
+  // =========================================================
+  let __suppressPop = false;
+
+  function pushNavState() {
+    try { history.pushState({ nav: 1, ts: Date.now() }, ''); } catch(e) {}
+  }
+
+  function popNavStateSilently() {
+    if (__suppressPop) return;
+    __suppressPop = true;
+    try { history.back(); } catch(e) { __suppressPop = false; }
+  }
+
+  // Обработчик аппаратной кнопки "Назад" / системного свайпа Android
+  window.addEventListener('popstate', () => {
+    if (__suppressPop) {
+      __suppressPop = false;
+      return;
+    }
+    handleBackAction();
+  });
+
+  // Логика: что именно закрыть при возврате
+  function handleBackAction() {
+    // 1) Календарь (поверх модалки)
+    const cal = document.getElementById('calendar-popup');
+    if (cal && cal.classList.contains('active')) {
+      cal.classList.remove('active');
+      return true;
+    }
+    // 2) Активная модалка
+    const activeModal = document.querySelector('.modal-overlay.active');
+    if (activeModal) {
+      activeModal.classList.remove('active');
+      return true;
+    }
+    // 3) Экран не главный — вернуться на главный
+    const activeScreen = document.querySelector('.screen.active');
+    if (activeScreen && activeScreen.id !== 'screen-main') {
+      renderMain();
+      showScreen('screen-main');
+      return true;
+    }
+    // 4) Мы на главном — ничего не закрываем, ОС выйдет из приложения
+    return false;
+  }
+
+  // Вызывается из кнопок ← и из свайпа
+  function userGoBack() {
+    const didSomething = handleBackAction();
+    if (didSomething) popNavStateSilently();
+  }
+
+  function canGoBack() {
+    if (document.getElementById('calendar-popup').classList.contains('active')) return true;
+    if (document.querySelector('.modal-overlay.active')) return true;
+    const activeScreen = document.querySelector('.screen.active');
+    if (activeScreen && activeScreen.id !== 'screen-main') return true;
+    return false;
+  }
+
+  // ==== СВАЙП ОТ ЛЕВОГО КРАЯ ====
+  (function initEdgeSwipe() {
+    const EDGE_ZONE = 55;     // зона от левого края
+    const MIN_DISTANCE = 70;  // минимальная длина свайпа
+    const MAX_Y_DEVIATION = 90;
+
+    let tracking = false;
+    let startX = 0;
+    let startY = 0;
+    let moved = false;
+
+    const arrow = document.getElementById('edge-arrow');
+
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) { tracking = false; return; }
+      const t = e.touches[0];
+      if (t.clientX <= EDGE_ZONE && canGoBack()) {
+        tracking = true;
+        moved = false;
+        startX = t.clientX;
+        startY = t.clientY;
+        // Показать стрелку
+        if (arrow) {
+          arrow.classList.add('visible');
+        }
+      } else {
+        tracking = false;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!tracking) return;
+      const t = e.touches[0];
+      const dx = t.clientX - startX;
+      const dy = Math.abs(t.clientY - startY);
+      // Если сдвинулись заметно вправо — включаем "hover"
+      if (dx > 30 && dy < MAX_Y_DEVIATION) {
+        if (!moved) {
+          moved = true;
+          if (arrow) arrow.classList.add('hover');
+        }
+      } else {
+        if (moved) {
+          moved = false;
+          if (arrow) arrow.classList.remove('hover');
+        }
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - startX;
+      const dy = Math.abs(t.clientY - startY);
+
+      // Скрыть стрелку
+      if (arrow) {
+        arrow.classList.remove('visible');
+        arrow.classList.remove('hover');
+      }
+
+      // Сработал свайп?
+      if (dx >= MIN_DISTANCE && dy <= MAX_Y_DEVIATION) {
+        userGoBack();
+      }
+      moved = false;
+    }, { passive: true });
+
+    // Отмена — если пользователь убрал палец за пределы
+    document.addEventListener('touchcancel', () => {
+      tracking = false;
+      moved = false;
+      if (arrow) {
+        arrow.classList.remove('visible');
+        arrow.classList.remove('hover');
+      }
+    }, { passive: true });
+  })();
+
+  // =========================================================
+  // ============ КОНЕЦ СИСТЕМЫ ВОЗВРАТА ====================
+  // =========================================================
+
   function showScreen(id) {
+    const prevActive = document.querySelector('.screen.active');
+    const wasId = prevActive ? prevActive.id : null;
+
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.getElementById('main-nav').style.display = (id === 'screen-main') ? 'flex' : 'none';
     window.scrollTo(0, 0);
+
+    // Пушим в историю только когда идём ВПЕРЁД на не-главный экран
+    if (id !== 'screen-main' && wasId !== id) {
+      pushNavState();
+    }
   }
 
   function renderMain() {
@@ -1348,8 +1534,8 @@
     pendingHighlight = null;
   }
 
-  function goBack() { renderMain(); showScreen('screen-main'); }
-  function goBackFromProducts() { renderMain(); showScreen('screen-main'); }
+  function goBack() { userGoBack(); }
+  function goBackFromProducts() { userGoBack(); }
   function scrollToWarehouses() { renderMain(); showScreen('screen-main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
   function showProducts() { renderProducts(); showScreen('screen-products'); }
 
@@ -1410,10 +1596,22 @@
     }
   }
 
-  function openModal(id) { document.getElementById(id).classList.add('active'); }
-  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (!el.classList.contains('active')) {
+      el.classList.add('active');
+      pushNavState();
+    }
+  }
 
-  // ==== НАСТРОЙКИ: ЭКСПОРТ / ИМПОРТ / СБРОС ====
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el.classList.contains('active')) return;
+    el.classList.remove('active');
+    popNavStateSilently();
+  }
+
+  // ==== НАСТРОЙКИ ====
   function openSettings() {
     openModal('modal-settings');
   }
@@ -1460,7 +1658,6 @@
     reader.onload = (ev) => {
       try {
         const parsed = JSON.parse(ev.target.result);
-        // Поддерживаем 2 формата: с обёрткой {app, state} и без неё
         const data = parsed.state || parsed;
 
         if (!data || !data.warehouses) {
@@ -1730,12 +1927,23 @@
       dpViewDate = new Date(t.getFullYear(), t.getMonth(), 1);
     }
     renderCalendar();
-    document.getElementById('calendar-popup').classList.add('active');
+    const el = document.getElementById('calendar-popup');
+    if (!el.classList.contains('active')) {
+      el.classList.add('active');
+      pushNavState();
+    }
   }
   function openPalletDatePicker() { openDatePicker(document.getElementById('pallet-date-iso').value, setPalletDate); }
   function openEditDatePicker() { openDatePicker(document.getElementById('edit-pallet-date-iso').value, setEditDate); }
   function openSearchDatePicker() { openDatePicker(searchDateIso, setSearchDate); }
-  function closeDatePicker() { document.getElementById('calendar-popup').classList.remove('active'); }
+
+  function closeDatePicker() {
+    const el = document.getElementById('calendar-popup');
+    if (!el.classList.contains('active')) return;
+    el.classList.remove('active');
+    popNavStateSilently();
+  }
+
   function dpPrevMonth() { dpViewDate = new Date(dpViewDate.getFullYear(), dpViewDate.getMonth() - 1, 1); renderCalendar(); }
   function dpNextMonth() { dpViewDate = new Date(dpViewDate.getFullYear(), dpViewDate.getMonth() + 1, 1); renderCalendar(); }
 
@@ -1984,7 +2192,7 @@
   }
 
   document.querySelectorAll('.modal-overlay').forEach(ov => {
-    ov.addEventListener('click', (e) => { if (e.target === ov) ov.classList.remove('active'); });
+    ov.addEventListener('click', (e) => { if (e.target === ov) closeModal(ov.id); });
   });
 
   document.getElementById('product-name-input').addEventListener('keydown', (e) => {
