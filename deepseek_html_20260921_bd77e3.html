@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0e1f">
+<meta name="apple-mobile-web-app-title" content="Дербент вино">
+<title>Дербент вино</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%233a0f5c'/%3E%3Cstop offset='100%25' stop-color='%237b2cbf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='360' font-family='Georgia,serif' font-size='320' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EД%3C/text%3E%3Ccircle cx='380' cy='130' r='18' fill='%23e0b3ff'/%3E%3Ccircle cx='350' cy='170' r='18' fill='%23e0b3ff'/%3E%3Ccircle cx='410' cy='170' r='18' fill='%23e0b3ff'/%3E%3Ccircle cx='380' cy='210' r='18' fill='%23e0b3ff'/%3E%3Cpath d='M380 110 Q380 80 400 70' stroke='%237bbf4f' stroke-width='10' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%233a0f5c'/%3E%3Cstop offset='100%25' stop-color='%237b2cbf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ctext x='256' y='360' font-family='Georgia,serif' font-size='320' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EД%3C/text%3E%3Ccircle cx='380' cy='130' r='18' fill='%23e0b3ff'/%3E%3Ccircle cx='350' cy='170' r='18' fill='%23e0b3ff'/%3E%3Ccircle cx='410' cy='170' r='18' fill='%23e0b3ff'/%3E%3Ccircle cx='380' cy='210' r='18' fill='%23e0b3ff'/%3E%3Cpath d='M380 110 Q380 80 400 70' stroke='%237bbf4f' stroke-width='10' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overscroll-behavior-y: none; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a0e1f;
+    color: #fff;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  .app {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(160deg, #2a1226 0%, #1a0e1f 50%, #0f0714 100%);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .header {
+    padding: calc(20px + env(safe-area-inset-top, 0px)) 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky;
+    top: 0;
+    background: linear-gradient(180deg, #2a1226 0%, rgba(42,18,38,0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 50;
+  }
+  .grape-icon {
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    border-radius: 12px;
+    font-size: 24px;
+    box-shadow: 0 4px 16px rgba(155, 89, 182, 0.4);
+    flex-shrink: 0;
+  }
+  .header-title { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .header-title h1 { font-size: 17px; font-weight: 700; letter-spacing: 0.3px; }
+  .header-title span { font-size: 11px; color: #b088c9; margin-top: 2px; }
+
+  .back-btn {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: #fff;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+  .back-btn:active { background: rgba(255,255,255,0.16); }
+
+  .settings-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(199,125,255,0.2);
+    color: #e0c4f0;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .settings-btn:active { background: rgba(199,125,255,0.2); transform: scale(0.94); }
+
+  .content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #screen-main .content,
+  #screen-warehouse .content,
+  #screen-products .content {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #9d7bb3;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  /* Поиск */
+  .search-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(199,125,255,0.18);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 18px;
+  }
+  .search-tile-row { display: flex; align-items: center; gap: 8px; }
+  .search-input-icon { color: #9d7bb3; font-size: 16px; flex-shrink: 0; padding-left: 4px; }
+  .search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 8px 4px;
+    min-width: 0;
+  }
+  .search-input::placeholder { color: #6d5578; }
+
+  .search-mini-btn {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    border: 1px solid rgba(199,125,255,0.22);
+    background: rgba(199,125,255,0.08);
+    color: #d9a9ff;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    font-family: inherit;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .search-mini-btn:active { background: rgba(199,125,255,0.22); transform: scale(0.94); }
+  .search-mini-btn.active {
+    background: linear-gradient(135deg, rgba(199,125,255,0.4), rgba(123,44,191,0.5));
+    border-color: #c77dff;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(199,125,255,0.4);
+  }
+  .search-divider { height: 1px; background: rgba(199,125,255,0.12); margin: 8px 0; display: none; }
+  .search-tile.expanded .search-divider { display: block; }
+  .search-date-row { display: none; align-items: center; gap: 8px; padding: 4px 4px 2px; }
+  .search-tile.expanded .search-date-row { display: flex; }
+  .search-date-pill {
+    flex: 1;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(199,125,255,0.15);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .search-date-pill:active { background: rgba(199,125,255,0.1); }
+  .search-date-text { font-size: 14px; color: #e0c4f0; font-weight: 500; }
+  .search-date-text.placeholder { color: #6d5578; font-weight: 400; }
+  .search-date-icon { font-size: 15px; filter: drop-shadow(0 0 4px rgba(199,125,255,0.5)); }
+
+  /* Результаты поиска */
+  .search-results-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  .search-results-header.visible { display: flex; }
+  .search-results-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #9d7bb3;
+    font-weight: 600;
+  }
+  .search-results-count {
+    font-size: 12px;
+    color: #d9a9ff;
+    font-weight: 700;
+    background: rgba(199,125,255,0.15);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(199,125,255,0.25);
+  }
+  .search-results-scroll {
+    max-height: 60vh;
+    max-height: 60dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 6px;
+    margin-right: -6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(199,125,255,0.5) rgba(199,125,255,0.08);
+    scroll-behavior: smooth;
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
+    mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
+  }
+  .search-results-scroll.not-scrollable {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .search-results-scroll::-webkit-scrollbar { width: 6px; }
+  .search-results-scroll::-webkit-scrollbar-track {
+    background: rgba(199,125,255,0.06);
+    border-radius: 6px;
+  }
+  .search-results-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c77dff, #7b2cbf);
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(199,125,255,0.6);
+  }
+
+  .search-results { margin-bottom: 22px; }
+
+  .search-result {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(199,125,255,0.2);
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex; flex-direction: column; gap: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .search-result:last-child { margin-bottom: 0; }
+  .search-result:active {
+    background: rgba(199,125,255,0.12);
+    transform: scale(0.98);
+    border-color: #c77dff;
+  }
+  .search-result .sr-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    display: flex; align-items: center; gap: 6px;
+    padding-right: 24px;
+    word-break: break-word;
+  }
+  .search-result .sr-meta {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    font-size: 11.5px; color: #b088c9;
+  }
+  .search-result .sr-meta span {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(199,125,255,0.08);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .search-result .sr-meta .sr-date {
+    background: linear-gradient(135deg, rgba(255, 200, 100, 0.3), rgba(255, 170, 50, 0.22));
+    color: #ffdd8a;
+    border: 1px solid rgba(255, 200, 100, 0.5);
+    box-shadow: 0 0 10px rgba(255, 200, 100, 0.25), inset 0 0 6px rgba(255, 200, 100, 0.08);
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    font-size: 11px;
+  }
+
+  .search-result .sr-arrow {
+    position: absolute;
+    right: 14px; top: 16px;
+    font-size: 16px;
+    color: #9d7bb3;
+    transition: all 0.2s;
+  }
+  .search-result:active .sr-arrow { color: #c77dff; transform: translateX(3px); }
+  .search-no-result {
+    text-align: center;
+    padding: 16px;
+    color: #7d5f96;
+    font-size: 13px;
+    font-style: italic;
+    background: rgba(255,255,255,0.02);
+    border: 1px dashed rgba(199,125,255,0.15);
+    border-radius: 12px;
+  }
+
+  /* Автокомплит */
+  .autocomplete-wrap { position: relative; }
+  .autocomplete-list {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    margin-top: 6px;
+    background: #2c1430;
+    border: 1px solid rgba(199,125,255,0.35);
+    border-radius: 12px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 20;
+    display: none;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    -webkit-overflow-scrolling: touch;
+  }
+  .autocomplete-list.active { display: block; }
+  .autocomplete-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #e0c4f0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.12s;
+    word-break: break-word;
+  }
+  .autocomplete-item:last-child { border-bottom: none; }
+  .autocomplete-item:hover,
+  .autocomplete-item:active { background: rgba(199,125,255,0.18); color: #fff; }
+  .autocomplete-empty {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #6d5578;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Склады */
+  .warehouse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .warehouse-card {
+    background: linear-gradient(145deg, rgba(123,44,191,0.35), rgba(60,20,80,0.6));
+    border: 2px solid rgba(199,125,255,0.45);
+    border-radius: 20px;
+    padding: 46px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+  .warehouse-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(199,125,255,0.45), transparent 70%);
+    border-radius: 50%;
+  }
+  .warehouse-card:active {
+    transform: scale(0.96);
+    border-color: #e0b3ff;
+    background: linear-gradient(145deg, rgba(150,60,220,0.5), rgba(80,30,110,0.7));
+  }
+  .warehouse-card .name {
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: rgba(20, 8, 25, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(199,125,255,0.15);
+    padding: 12px 20px calc(18px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px;
+    font-family: inherit;
+    min-height: 48px;
+  }
+  .nav-btn.primary {
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(123,44,191,0.5);
+  }
+  .nav-btn.secondary {
+    background: rgba(255,255,255,0.08);
+    color: #e0c4f0;
+    border: 1px solid rgba(199,125,255,0.2);
+  }
+  .nav-btn:active { transform: scale(0.97); }
+
+  .rows-header { margin-bottom: 14px; }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7d5f96;
+  }
+  .empty-state .emoji { font-size: 48px; margin-bottom: 12px; display: block; opacity: 0.6;}
+  .empty-state p { font-size: 14px; line-height: 1.5; }
+
+  .row-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(199,125,255,0.12);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.3s;
+  }
+  .row-number {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #7b2cbf, #5a1d8f);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(123,44,191,0.35);
+  }
+  .row-content { flex: 1; min-width: 0; }
+
+  .row-item.row-empty-clickable { cursor: pointer; }
+  .row-item.row-empty-clickable:active {
+    background: rgba(199,125,255,0.14);
+    border-color: rgba(199,125,255,0.4);
+    transform: scale(0.99);
+  }
+  .row-empty-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+  .row-empty-text { color: #7d5f96; font-style: italic; font-size: 13.5px; }
+  .row-empty-plus {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: rgba(199,125,255,0.12);
+    border: 1px solid rgba(199,125,255,0.3);
+    color: #d9a9ff;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .row-item.row-empty-clickable:active .row-empty-plus {
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    color: #fff;
+    border-color: #c77dff;
+    transform: scale(1.1);
+  }
+
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  .item-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: rgba(199,125,255,0.1);
+    border: 1px solid rgba(199,125,255,0.25);
+    border-radius: 10px;
+    padding: 8px 10px 8px 12px;
+    font-size: 13.5px;
+    color: #e0c4f0;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+    width: 100%;
+  }
+  .item-pill:active { background: rgba(199,125,255,0.25); transform: scale(0.99); }
+  .item-pill .pname {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    font-weight: 600;
+    color: #f0dcff;
+    font-size: 13.5px;
+    letter-spacing: 0.2px;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.35;
+  }
+  .item-date {
+    background: linear-gradient(135deg, rgba(255, 200, 100, 0.25), rgba(255, 170, 50, 0.2));
+    color: #ffdd8a;
+    border-radius: 7px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 200, 100, 0.4);
+    box-shadow: 0 0 10px rgba(255, 200, 100, 0.15);
+    flex-shrink: 0;
+  }
+
+  @keyframes rowHighlight {
+    0% { background: rgba(255,255,255,0.04); border-color: rgba(199,125,255,0.12); box-shadow: none; }
+    20% { background: rgba(199,125,255,0.3); border-color: #c77dff; box-shadow: 0 0 30px rgba(199,125,255,0.7), inset 0 0 20px rgba(199,125,255,0.2); }
+    50% { background: rgba(199,125,255,0.18); border-color: #c77dff; box-shadow: 0 0 20px rgba(199,125,255,0.4); }
+    100% { background: rgba(255,255,255,0.04); border-color: rgba(199,125,255,0.12); box-shadow: none; }
+  }
+  .row-item.row-highlight { animation: rowHighlight 2s ease-in-out; }
+
+  @keyframes pillHighlight {
+    0% { background: rgba(199,125,255,0.1); border-color: rgba(199,125,255,0.25); box-shadow: none; }
+    20% { background: rgba(255,200,100,0.35); border-color: #ffc864; box-shadow: 0 0 20px rgba(255,200,100,0.8); transform: scale(1.03); }
+    50% { background: rgba(255,200,100,0.2); border-color: #ffc864; box-shadow: 0 0 12px rgba(255,200,100,0.4); transform: scale(1); }
+    100% { background: rgba(199,125,255,0.1); border-color: rgba(199,125,255,0.25); box-shadow: none; transform: scale(1); }
+  }
+  .item-pill.pill-highlight { animation: pillHighlight 2s ease-in-out; }
+
+  /* Модалки */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 200;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    width: 100%;
+    max-width: 480px;
+    background: #241028;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 20px calc(32px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid rgba(199,125,255,0.3);
+    animation: slideUp 0.25s ease-out;
+    max-height: 88vh;
+    max-height: 88dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .modal h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #fff;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    color: #b088c9;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .form-group label.left { text-align: left; }
+  .form-group input[type="text"],
+  .form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(199,125,255,0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    transition: border 0.15s;
+  }
+  .form-group input[type="text"]:focus,
+  .form-group select:focus { border-color: #c77dff; }
+
+  .row-picker-wrap { position: relative; margin-top: 4px; }
+  .row-picker {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    padding: 6px 8px 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+    cursor: grab;
+  }
+  .row-picker::-webkit-scrollbar { display: none; }
+  .row-picker::after { content: ''; flex-shrink: 0; width: 8px; }
+  .row-pick-item {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    min-width: 54px;
+    height: 54px;
+    padding: 0 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(199,125,255,0.18);
+    color: #d9b8ec;
+    font-size: 17px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: inherit;
+    user-select: none;
+    -webkit-user-select: none;
+    letter-spacing: 0.2px;
+  }
+  .row-pick-item:active { transform: scale(0.92); background: rgba(199,125,255,0.15); }
+  .row-pick-item.selected {
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    color: #fff;
+    border-color: #c77dff;
+    box-shadow: 0 6px 20px rgba(199,125,255,0.55), 0 0 0 3px rgba(199,125,255,0.15);
+    transform: scale(1.06);
+  }
+  .row-pick-hint {
+    text-align: center;
+    font-size: 12px;
+    color: #9d7bb3;
+    margin-top: -4px;
+    margin-bottom: 4px;
+  }
+  .row-pick-hint b { color: #d9a9ff; font-size: 14px; font-weight: 800; }
+
+  .date-input-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 14px 13px 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(199,125,255,0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 52px;
+  }
+  .date-input-wrap:active,
+  .date-input-wrap:focus { border-color: #c77dff; }
+  .date-display { font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 0.3px; }
+  .date-display.placeholder { color: #6d5578; font-weight: 400; }
+  .cal-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px;
+    font-size: 18px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(199,125,255,0.3), rgba(123,44,191,0.5));
+    border: 1px solid rgba(199,125,255,0.5);
+    filter: drop-shadow(0 0 6px rgba(199,125,255,0.7));
+    flex-shrink: 0;
+  }
+
+  .counter {
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px;
+    padding: 8px 0;
+  }
+  .counter-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(199,125,255,0.4);
+    background: rgba(199,125,255,0.12);
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: inherit;
+    transition: all 0.15s;
+    padding-bottom: 4px;
+  }
+  .counter-btn:active { transform: scale(0.9); background: rgba(199,125,255,0.3); border-color: #c77dff; }
+  .counter-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .counter-value { font-size: 42px; font-weight: 900; color: #fff; min-width: 80px; text-align: center; }
+  .counter-hint { text-align: center; font-size: 12px; color: #9d7bb3; margin-top: 6px; }
+
+  .modal-actions { display: flex; gap: 10px; margin-top: 22px; }
+  .modal-actions button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 50px;
+  }
+  .btn-cancel { background: rgba(255,255,255,0.08); color: #e0c4f0; }
+  .btn-confirm {
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(123,44,191,0.4);
+  }
+  .btn-danger {
+    background: rgba(220, 60, 60, 0.2);
+    color: #ff8a8a;
+    border: 1px solid rgba(255, 100, 100, 0.3);
+  }
+  .btn-confirm:active, .btn-cancel:active, .btn-danger:active { transform: scale(0.98); }
+
+  /* ==== КНОПКИ В МОДАЛКЕ НАСТРОЕК ==== */
+  .settings-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .settings-action {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(199,125,255,0.2);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    color: #fff;
+    text-align: left;
+    width: 100%;
+    min-height: 60px;
+  }
+  .settings-action:active {
+    background: rgba(199,125,255,0.15);
+    transform: scale(0.98);
+  }
+  .settings-action.danger {
+    border-color: rgba(255,100,100,0.3);
+  }
+  .settings-action.danger:active {
+    background: rgba(255,80,80,0.15);
+  }
+  .settings-action-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(199,125,255,0.3), rgba(123,44,191,0.4));
+    border: 1px solid rgba(199,125,255,0.4);
+  }
+  .settings-action.danger .settings-action-icon {
+    background: linear-gradient(135deg, rgba(255,80,80,0.25), rgba(180,30,30,0.35));
+    border-color: rgba(255,100,100,0.4);
+  }
+  .settings-action-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+  }
+  .settings-action-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .settings-action-sub {
+    font-size: 12px;
+    color: #b088c9;
+    line-height: 1.35;
+  }
+  .settings-action.danger .settings-action-title { color: #ffb3b3; }
+  .settings-action.danger .settings-action-sub { color: #c98a8a; }
+
+  .settings-info {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: rgba(199,125,255,0.06);
+    border: 1px solid rgba(199,125,255,0.15);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #b088c9;
+    line-height: 1.5;
+  }
+  .settings-info b { color: #d9a9ff; }
+
+  .product-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(199,125,255,0.15);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .product-card:active { background: rgba(199,125,255,0.12); transform: scale(0.98); }
+  .product-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7b2cbf, #5a1d8f);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .product-card .p-name { font-size: 15px; font-weight: 700; color: #fff; flex: 1; word-break: break-word; }
+  .product-card .p-edit { font-size: 18px; color: #9d7bb3; flex-shrink: 0; }
+
+  .calendar-popup {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 400;
+    padding: 20px;
+  }
+  .calendar-popup.active { display: flex; }
+  .calendar {
+    background: #2c1430;
+    border-radius: 22px;
+    padding: 20px;
+    border: 1px solid rgba(199,125,255,0.35);
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(199,125,255,0.2);
+    animation: popIn 0.2s ease-out;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .dp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .dp-nav {
+    background: rgba(199,125,255,0.15);
+    border: 1px solid rgba(199,125,255,0.3);
+    color: #d9a9ff;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    font-family: inherit;
+    padding-bottom: 3px;
+  }
+  .dp-nav:active { background: rgba(199,125,255,0.35); transform: scale(0.94); }
+  .dp-month { font-size: 16px; font-weight: 700; color: #fff; text-transform: capitalize; }
+  .dp-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px; }
+  .dp-weekdays span {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #9d7bb3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 0;
+  }
+  .dp-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .dp-day {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #e0c4f0;
+    cursor: pointer;
+    transition: all 0.12s;
+    user-select: none;
+  }
+  .dp-day:active { transform: scale(0.88); }
+  .dp-day.other-month { color: #4d3a5a; pointer-events: none; }
+  .dp-day.today { border: 1.5px solid #c77dff; color: #e0b3ff; box-shadow: 0 0 10px rgba(199,125,255,0.35); }
+  .dp-day.selected {
+    background: linear-gradient(135deg, #7b2cbf, #c77dff);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(199,125,255,0.55);
+    border-color: transparent;
+  }
+  .dp-footer { margin-top: 16px; display: flex; gap: 10px; }
+  .dp-footer button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(199,125,255,0.3);
+    background: rgba(199,125,255,0.1);
+    color: #e0b3ff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .dp-footer button:active { background: rgba(199,125,255,0.25); transform: scale(0.97); }
+
+  .toast {
+    position: fixed;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(123,44,191,0.95);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    z-index: 300;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    max-width: 90vw;
+    text-align: center;
+    line-height: 1.35;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  @media (max-width: 380px) {
+    .content { padding: 14px; }
+    #screen-main .content,
+    #screen-warehouse .content,
+    #screen-products .content { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+    .header { padding-left: 14px; padding-right: 14px; }
+    .bottom-nav { padding-left: 14px; padding-right: 14px; }
+    .warehouse-grid { gap: 10px; }
+    .warehouse-card { padding: 36px 8px; border-radius: 16px; }
+    .warehouse-card .name { font-size: 18px; }
+    .search-tile { padding: 10px; }
+    .search-input { font-size: 16px; }
+    .modal { padding: 20px 14px calc(24px + env(safe-area-inset-bottom, 0px)); }
+    .row-pick-item { min-width: 48px; height: 48px; font-size: 15px; padding: 0 12px; }
+    .counter-btn { width: 54px; height: 54px; font-size: 26px; }
+    .counter-value { font-size: 36px; min-width: 60px; }
+    .item-pill .pname { font-size: 13px; }
+    .product-card { padding: 14px; }
+    .product-card .p-name { font-size: 14px; }
+    .search-results-scroll { max-height: 50vh; max-height: 50dvh; }
+  }
+  @media (max-width: 340px) {
+    .warehouse-card { padding: 30px 6px; }
+    .warehouse-card .name { font-size: 16px; }
+    .nav-btn { font-size: 13px; padding: 12px; }
+    .search-mini-btn { width: 32px; height: 32px; }
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    .header { padding-top: 12px; padding-bottom: 10px; }
+    .warehouse-card { padding: 20px 10px; }
+    .warehouse-card .name { font-size: 16px; }
+    .search-results-scroll { max-height: 40vh; max-height: 40dvh; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div id="screen-main" class="screen active">
+    <div class="header">
+      <div class="grape-icon">🍇</div>
+      <div class="header-title">
+        <h1>Дербент вино</h1>
+        <span>Система учёта продукции</span>
+      </div>
+      <button class="settings-btn" onclick="openSettings()" title="Настройки">⚙️</button>
+    </div>
+    <div class="content">
+      <div class="search-tile" id="search-tile">
+        <div class="search-tile-row">
+          <span class="search-input-icon">🔍</span>
+          <input type="text" id="search-name" class="search-input" placeholder="Поиск продукции..." autocomplete="off">
+          <button class="search-mini-btn" id="search-cal-toggle" onclick="toggleSearchDate()" title="Фильтр по дате">📅</button>
+          <button class="search-mini-btn" onclick="clearSearch()" title="Сбросить">✕</button>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-date-row">
+          <div class="search-date-pill" onclick="openSearchDatePicker()">
+            <span class="search-date-text placeholder" id="search-date-display">Любая дата</span>
+            <span class="search-date-icon">📅</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-results-header" id="search-results-header">
+        <div class="search-results-title">🔎 Результаты</div>
+        <div class="search-results-count" id="search-results-count">0</div>
+      </div>
+
+      <div class="search-results" id="search-results"></div>
+
+      <div class="section-title">Мои склады</div>
+      <div class="warehouse-grid" id="warehouse-grid"></div>
+    </div>
+  </div>
+
+  <div id="screen-warehouse" class="screen">
+    <div class="header">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <div class="header-title">
+        <h1 id="wh-title">Склад 1</h1>
+        <span id="wh-subtitle">0 рядов</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="rows-header">
+        <div class="section-title" style="margin:0">Ряды</div>
+      </div>
+      <div id="rows-list"></div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-btn secondary" onclick="openRowsSettings()">⚙️ Настроить ряды</button>
+      <button class="nav-btn primary" onclick="openAddPallet()">📦 Добавить паллеты</button>
+    </div>
+  </div>
+
+  <div id="screen-products" class="screen">
+    <div class="header">
+      <button class="back-btn" onclick="goBackFromProducts()">←</button>
+      <div class="header-title">
+        <h1>Продукция</h1>
+        <span>Каталог по алфавиту</span>
+      </div>
+    </div>
+    <div class="content" id="products-content"></div>
+    <div class="bottom-nav">
+      <button class="nav-btn primary" onclick="openAddProduct()">➕ Добавить продукцию</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav" id="main-nav">
+    <button class="nav-btn primary" onclick="scrollToWarehouses()">🏭 Склады</button>
+    <button class="nav-btn secondary" onclick="showProducts()">🍷 Продукция</button>
+  </div>
+</div>
+
+<!-- МОДАЛКА: НАСТРОЙКИ / РЕЗЕРВНОЕ КОПИРОВАНИЕ -->
+<div class="modal-overlay" id="modal-settings">
+  <div class="modal">
+    <h2>⚙️ Настройки и резервные копии</h2>
+    <div class="settings-actions">
+      <button class="settings-action" onclick="exportData()">
+        <div class="settings-action-icon">📤</div>
+        <div class="settings-action-text">
+          <div class="settings-action-title">Сохранить копию</div>
+          <div class="settings-action-sub">Экспорт всех данных в файл .json</div>
+        </div>
+      </button>
+      <button class="settings-action" onclick="triggerImport()">
+        <div class="settings-action-icon">📥</div>
+        <div class="settings-action-text">
+          <div class="settings-action-title">Загрузить копию</div>
+          <div class="settings-action-sub">Восстановить данные из файла .json</div>
+        </div>
+      </button>
+      <button class="settings-action danger" onclick="confirmReset()">
+        <div class="settings-action-icon">⚠️</div>
+        <div class="settings-action-text">
+          <div class="settings-action-title">Сбросить всё</div>
+          <div class="settings-action-sub">Удалить все склады, ряды и продукцию</div>
+        </div>
+      </button>
+    </div>
+    <div class="settings-info">
+      💾 <b>Совет:</b> делай резервную копию раз в неделю и сохраняй файл в облако (Google Drive, Яндекс.Диск). Так данные точно не потеряются даже при смене телефона.
+    </div>
+    <input type="file" id="import-file-input" accept=".json,application/json" style="display:none;">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-settings')">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: НАСТРОИТЬ РЯДЫ -->
+<div class="modal-overlay" id="modal-rows">
+  <div class="modal">
+    <h2>⚙️ Настроить ряды</h2>
+    <div class="form-group">
+      <label>Количество рядов</label>
+      <div class="counter">
+        <button class="counter-btn" id="rows-minus" onclick="changeRows(-1)">−</button>
+        <div class="counter-value" id="rows-value">0</div>
+        <button class="counter-btn" id="rows-plus" onclick="changeRows(1)">+</button>
+      </div>
+      <div class="counter-hint">от 0 до 50</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-rows')">Отмена</button>
+      <button class="btn-confirm" onclick="saveRows()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: ДОБАВИТЬ ПАЛЛЕТУ -->
+<div class="modal-overlay" id="modal-pallet">
+  <div class="modal">
+    <h2 id="pallet-modal-title">📦 Добавить паллеты</h2>
+    <div class="form-group">
+      <label class="left">Название продукции</label>
+      <div class="autocomplete-wrap">
+        <input type="text" id="pallet-name" placeholder="Начните вводить название..." autocomplete="off">
+        <div class="autocomplete-list" id="autocomplete-list"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="left">Ряд: <span id="pallet-row-label">1</span></label>
+      <div class="row-picker-wrap">
+        <div class="row-picker" id="pallet-row-picker"></div>
+      </div>
+      <div class="row-pick-hint">Выбран ряд: <b id="pallet-row-hint">1</b></div>
+    </div>
+    <div class="form-group">
+      <label class="left">Дата изготовления</label>
+      <input type="hidden" id="pallet-date-iso" value="">
+      <div class="date-input-wrap" onclick="openPalletDatePicker()">
+        <span class="date-display placeholder" id="pallet-date-display">Выберите дату</span>
+        <span class="cal-icon">📅</span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-pallet')">Отмена</button>
+      <button class="btn-confirm" onclick="savePallet()">Добавить</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: РЕДАКТИРОВАТЬ ПАЛЛЕТУ -->
+<div class="modal-overlay" id="modal-edit-pallet">
+  <div class="modal">
+    <h2>✏️ Редактировать паллету</h2>
+    <div class="form-group">
+      <label class="left">Название продукции</label>
+      <div class="autocomplete-wrap">
+        <input type="text" id="edit-pallet-name" placeholder="Название..." autocomplete="off">
+        <div class="autocomplete-list" id="edit-autocomplete-list"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="left">Ряд: <span id="edit-pallet-row-label">1</span></label>
+      <div class="row-picker-wrap">
+        <div class="row-picker" id="edit-pallet-row-picker"></div>
+      </div>
+      <div class="row-pick-hint">Выбран ряд: <b id="edit-pallet-row-hint">1</b></div>
+    </div>
+    <div class="form-group">
+      <label class="left">Дата изготовления</label>
+      <input type="hidden" id="edit-pallet-date-iso" value="">
+      <div class="date-input-wrap" onclick="openEditDatePicker()">
+        <span class="date-display placeholder" id="edit-pallet-date-display">Выберите дату</span>
+        <span class="cal-icon">📅</span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-edit-pallet')">Отмена</button>
+      <button class="btn-confirm" onclick="saveEditPallet()">Сохранить</button>
+    </div>
+    <div class="modal-actions" style="margin-top:10px;">
+      <button class="btn-danger" onclick="deleteEditPallet()">🗑 Удалить</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: ПРОДУКЦИЯ -->
+<div class="modal-overlay" id="modal-product">
+  <div class="modal">
+    <h2 id="product-modal-title">➕ Новая продукция</h2>
+    <div class="form-group">
+      <label class="left">Название продукции</label>
+      <input type="text" id="product-name-input" placeholder="Например: Каберне 2020">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-product')">Отмена</button>
+      <button class="btn-confirm" onclick="saveProduct()">Сохранить</button>
+    </div>
+    <div class="modal-actions" id="product-delete-wrap" style="display:none; margin-top:10px;">
+      <button class="btn-danger" onclick="deleteProduct()">🗑 Удалить</button>
+    </div>
+  </div>
+</div>
+
+<!-- КАЛЕНДАРЬ -->
+<div class="calendar-popup" id="calendar-popup">
+  <div class="calendar">
+    <div class="dp-header">
+      <button class="dp-nav" onclick="dpPrevMonth()">‹</button>
+      <div class="dp-month" id="dp-month">Январь 2025</div>
+      <button class="dp-nav" onclick="dpNextMonth()">›</button>
+    </div>
+    <div class="dp-weekdays">
+      <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+    </div>
+    <div class="dp-days" id="dp-days"></div>
+    <div class="dp-footer">
+      <button onclick="dpClear()">Очистить</button>
+      <button onclick="dpToday()">Сегодня</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const DEFAULT_STATE = {
+    warehouses: {
+      1: { rows: 0, items: {} },
+      2: { rows: 0, items: {} },
+      3: { rows: 0, items: {} },
+      4: { rows: 0, items: {} },
+    },
+    products: []
+  };
+
+  let state;
+  try {
+    const saved = JSON.parse(localStorage.getItem('derbent_wine') || 'null');
+    state = (saved && saved.warehouses) ? saved : JSON.parse(JSON.stringify(DEFAULT_STATE));
+    if (!Array.isArray(state.products)) state.products = [];
+  } catch(e) {
+    state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  }
+
+  function migrateIds() {
+    for (let w = 1; w <= 4; w++) {
+      const wh = state.warehouses[w];
+      if (!wh || !wh.items) continue;
+      Object.values(wh.items).forEach(arr => {
+        arr.forEach(item => { if (!item.id) item.id = genId(); });
+      });
+    }
+  }
+
+  let currentWarehouse = 1;
+  let tempRows = 0;
+  let editingProductId = null;
+  let editingPalletId = null;
+  let editingPalletWh = null;
+  let editingPalletRow = null;
+  let searchDateIso = '';
+  let pendingHighlight = null;
+  let selectedPalletRow = 1;
+  let selectedEditRow = 1;
+
+  function saveState() { localStorage.setItem('derbent_wine', JSON.stringify(state)); }
+  function genId() { return 'i_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7); }
+  function formatDateShort(iso) {
+    if (!iso) return '';
+    const parts = iso.split('-');
+    if (parts.length !== 3) return iso;
+    return `${parts[2]}.${parts[1]}.${parts[0]}`;
+  }
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('main-nav').style.display = (id === 'screen-main') ? 'flex' : 'none';
+    window.scrollTo(0, 0);
+  }
+
+  function renderMain() {
+    const grid = document.getElementById('warehouse-grid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= 4; i++) {
+      const card = document.createElement('div');
+      card.className = 'warehouse-card';
+      card.innerHTML = `<div class="name">Склад ${i}</div>`;
+      card.addEventListener('click', () => openWarehouse(i));
+      grid.appendChild(card);
+    }
+    renderSearchResults();
+  }
+
+  function openWarehouse(num) {
+    currentWarehouse = num;
+    renderWarehouse();
+    showScreen('screen-warehouse');
+  }
+
+  function openWarehouseWithHighlight(num, rowNum, itemId) {
+    pendingHighlight = { wh: num, row: rowNum, itemId };
+    currentWarehouse = num;
+    renderWarehouse();
+    showScreen('screen-warehouse');
+    setTimeout(() => applyHighlight(), 60);
+  }
+
+  function applyHighlight() {
+    if (!pendingHighlight) return;
+    const { row, itemId } = pendingHighlight;
+    const rows = document.querySelectorAll('#rows-list .row-item');
+    if (rows[row - 1]) {
+      rows[row - 1].classList.add('row-highlight');
+      rows[row - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => rows[row - 1].classList.remove('row-highlight'), 2000);
+    }
+    if (itemId) {
+      const pill = document.querySelector(`.item-pill[data-item-id="${itemId}"]`);
+      if (pill) {
+        pill.classList.add('pill-highlight');
+        setTimeout(() => pill.classList.remove('pill-highlight'), 2000);
+      }
+    }
+    pendingHighlight = null;
+  }
+
+  function goBack() { renderMain(); showScreen('screen-main'); }
+  function goBackFromProducts() { renderMain(); showScreen('screen-main'); }
+  function scrollToWarehouses() { renderMain(); showScreen('screen-main'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function showProducts() { renderProducts(); showScreen('screen-products'); }
+
+  function renderWarehouse() {
+    const wh = state.warehouses[currentWarehouse];
+    if (!wh.items) wh.items = {};
+
+    document.getElementById('wh-title').textContent = `Склад ${currentWarehouse}`;
+    document.getElementById('wh-subtitle').textContent = `${wh.rows} рядов`;
+
+    const list = document.getElementById('rows-list');
+    list.innerHTML = '';
+
+    if (wh.rows === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <span class="emoji">📦</span>
+          <p>Ряды ещё не настроены.<br>Нажми «⚙️ Настроить ряды» ниже,<br>чтобы добавить от 1 до 50 рядов.</p>
+        </div>`;
+      return;
+    }
+
+    for (let i = 1; i <= wh.rows; i++) {
+      const items = wh.items[i] || [];
+      const rowEl = document.createElement('div');
+      rowEl.className = 'row-item';
+
+      if (items.length === 0) {
+        rowEl.classList.add('row-empty-clickable');
+        rowEl.innerHTML = `
+          <div class="row-number">${i}</div>
+          <div class="row-content">
+            <div class="row-empty-inner">
+              <span class="row-empty-text">Пусто · нажми, чтобы добавить</span>
+              <span class="row-empty-plus">+</span>
+            </div>
+          </div>
+        `;
+        rowEl.addEventListener('click', () => { openAddPallet(i); });
+      } else {
+        const contentHtml = items.map(p => `
+          <span class="item-pill" data-item-id="${p.id}">
+            <span class="pname">🍷 ${escapeHtml(p.name)}</span>
+            ${p.date ? `<span class="item-date">${formatDateShort(p.date)}</span>` : ''}
+          </span>
+        `).join('');
+        rowEl.innerHTML = `
+          <div class="row-number">${i}</div>
+          <div class="row-content"><div class="items-list">${contentHtml}</div></div>
+        `;
+        rowEl.querySelectorAll('.item-pill').forEach(pill => {
+          pill.addEventListener('click', () => {
+            openEditPallet(currentWarehouse, i, pill.getAttribute('data-item-id'));
+          });
+        });
+      }
+      list.appendChild(rowEl);
+    }
+  }
+
+  function openModal(id) { document.getElementById(id).classList.add('active'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+  // ==== НАСТРОЙКИ: ЭКСПОРТ / ИМПОРТ / СБРОС ====
+  function openSettings() {
+    openModal('modal-settings');
+  }
+
+  function exportData() {
+    try {
+      const data = {
+        app: 'derbent-wine',
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        state: state
+      };
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      const timeStr = `${String(now.getHours()).padStart(2,'0')}-${String(now.getMinutes()).padStart(2,'0')}`;
+      const filename = `derbent-backup-${dateStr}_${timeStr}.json`;
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      toast('Копия сохранена: ' + filename);
+    } catch(e) {
+      console.error(e);
+      toast('Ошибка экспорта');
+    }
+  }
+
+  function triggerImport() {
+    document.getElementById('import-file-input').click();
+  }
+
+  document.getElementById('import-file-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        // Поддерживаем 2 формата: с обёрткой {app, state} и без неё
+        const data = parsed.state || parsed;
+
+        if (!data || !data.warehouses) {
+          toast('Неверный формат файла');
+          return;
+        }
+
+        if (!confirm('Загрузить данные из файла? Текущие данные будут заменены.')) {
+          e.target.value = '';
+          return;
+        }
+
+        state = data;
+        if (!Array.isArray(state.products)) state.products = [];
+        migrateIds();
+        saveState();
+        closeModal('modal-settings');
+        renderMain();
+        toast('Данные восстановлены ✓');
+      } catch(err) {
+        console.error(err);
+        toast('Ошибка чтения файла');
+      }
+      e.target.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  function confirmReset() {
+    if (!confirm('⚠️ ВНИМАНИЕ!\n\nВсе склады, ряды, продукция и каталог будут УДАЛЕНЫ.\n\nСначала сохрани резервную копию!\n\nПродолжить?')) return;
+    if (!confirm('Точно удалить? Это действие НЕЛЬЗЯ отменить.')) return;
+    state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    saveState();
+    closeModal('modal-settings');
+    renderMain();
+    toast('Все данные сброшены');
+  }
+
+  // ==== РЯДЫ ====
+  function openRowsSettings() {
+    tempRows = state.warehouses[currentWarehouse].rows;
+    updateRowsDisplay();
+    openModal('modal-rows');
+  }
+  function changeRows(delta) {
+    tempRows = Math.max(0, Math.min(50, tempRows + delta));
+    updateRowsDisplay();
+  }
+  function updateRowsDisplay() {
+    document.getElementById('rows-value').textContent = tempRows;
+    document.getElementById('rows-minus').disabled = tempRows <= 0;
+    document.getElementById('rows-plus').disabled = tempRows >= 50;
+  }
+  function saveRows() {
+    const wh = state.warehouses[currentWarehouse];
+    if (!wh.items) wh.items = {};
+    Object.keys(wh.items).forEach(k => {
+      if (parseInt(k) > tempRows) delete wh.items[k];
+    });
+    wh.rows = tempRows;
+    saveState();
+    closeModal('modal-rows');
+    renderWarehouse();
+    toast(`Рядов сохранено: ${tempRows}`);
+  }
+
+  function renderRowPicker(containerId, count, selected, onSelect) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    for (let i = 1; i <= count; i++) {
+      const el = document.createElement('div');
+      el.className = 'row-pick-item' + (i === selected ? ' selected' : '');
+      el.textContent = i;
+      el.setAttribute('data-row', i);
+      el.addEventListener('click', () => {
+        const prev = container.querySelector('.row-pick-item.selected');
+        if (prev) prev.classList.remove('selected');
+        el.classList.add('selected');
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        if (onSelect) onSelect(i);
+      });
+      container.appendChild(el);
+    }
+    requestAnimationFrame(() => {
+      const sel = container.querySelector('.row-pick-item.selected');
+      if (sel) {
+        const targetLeft = sel.offsetLeft - container.offsetWidth / 2 + sel.offsetWidth / 2;
+        container.scrollLeft = Math.max(0, targetLeft);
+      }
+    });
+  }
+
+  function bindAutocomplete(inputEl, listEl, onPick) {
+    const show = () => {
+      const products = sortedProducts();
+      if (products.length === 0) {
+        listEl.innerHTML = '<div class="autocomplete-empty">Каталог пуст — введите название вручную</div>';
+        listEl.classList.add('active');
+        return;
+      }
+      const val = inputEl.value.trim().toLowerCase();
+      const filtered = val ? products.filter(p => p.name.toLowerCase().includes(val)) : products;
+      if (filtered.length === 0) {
+        listEl.innerHTML = '<div class="autocomplete-empty">Ничего не найдено</div>';
+        listEl.classList.add('active');
+        return;
+      }
+      listEl.innerHTML = filtered.map(p =>
+        `<div class="autocomplete-item" data-name="${escapeHtml(p.name)}">🍷 <span>${escapeHtml(p.name)}</span></div>`
+      ).join('');
+      listEl.classList.add('active');
+      listEl.querySelectorAll('.autocomplete-item').forEach(el => {
+        const pick = (e) => {
+          e.preventDefault();
+          const name = el.getAttribute('data-name');
+          inputEl.value = name;
+          listEl.classList.remove('active');
+          if (onPick) onPick(name);
+        };
+        el.addEventListener('mousedown', pick);
+        el.addEventListener('click', pick);
+      });
+    };
+    inputEl.addEventListener('input', show);
+    inputEl.addEventListener('focus', show);
+    inputEl.addEventListener('blur', () => setTimeout(() => listEl.classList.remove('active'), 150));
+  }
+
+  function openAddPallet(presetRow) {
+    const wh = state.warehouses[currentWarehouse];
+    if (wh.rows === 0) { toast('Сначала настрой ряды'); return; }
+
+    let initialRow = 1;
+    if (presetRow && presetRow >= 1 && presetRow <= wh.rows) initialRow = presetRow;
+    selectedPalletRow = initialRow;
+    document.getElementById('pallet-row-label').textContent = initialRow;
+    document.getElementById('pallet-row-hint').textContent = initialRow;
+
+    document.getElementById('pallet-modal-title').textContent =
+      presetRow ? `📦 Добавить в ряд ${initialRow}` : '📦 Добавить паллеты';
+
+    renderRowPicker('pallet-row-picker', wh.rows, initialRow, (i) => {
+      selectedPalletRow = i;
+      document.getElementById('pallet-row-label').textContent = i;
+      document.getElementById('pallet-row-hint').textContent = i;
+    });
+
+    document.getElementById('pallet-name').value = '';
+    document.getElementById('autocomplete-list').classList.remove('active');
+    const today = new Date();
+    setPalletDate(`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`);
+    openModal('modal-pallet');
+
+    setTimeout(() => {
+      const inp = document.getElementById('pallet-name');
+      if (inp && window.innerWidth > 400) inp.focus();
+    }, 260);
+  }
+
+  function setPalletDate(iso) {
+    document.getElementById('pallet-date-iso').value = iso || '';
+    const disp = document.getElementById('pallet-date-display');
+    if (iso) { disp.textContent = formatDateShort(iso); disp.classList.remove('placeholder'); }
+    else { disp.textContent = 'Выберите дату'; disp.classList.add('placeholder'); }
+  }
+
+  function savePallet() {
+    const name = document.getElementById('pallet-name').value.trim();
+    const row = selectedPalletRow;
+    const date = document.getElementById('pallet-date-iso').value;
+    if (!name) { toast('Введите название'); return; }
+    if (!date) { toast('Выберите дату'); return; }
+    const wh = state.warehouses[currentWarehouse];
+    if (!wh.items[row]) wh.items[row] = [];
+    wh.items[row].push({ id: genId(), name, date, ts: Date.now() });
+    const exists = state.products.some(p => p.name.toLowerCase() === name.toLowerCase());
+    if (!exists) state.products.push({ id: 'p_'+Date.now(), name });
+    saveState();
+    closeModal('modal-pallet');
+    renderWarehouse();
+    toast(`Добавлено в ряд ${row}`);
+  }
+
+  function openEditPallet(whNum, rowNum, itemId) {
+    const wh = state.warehouses[whNum];
+    const arr = wh.items[rowNum] || [];
+    const item = arr.find(x => x.id === itemId);
+    if (!item) return;
+    editingPalletId = itemId;
+    editingPalletWh = whNum;
+    editingPalletRow = rowNum;
+
+    selectedEditRow = rowNum;
+    document.getElementById('edit-pallet-row-label').textContent = rowNum;
+    document.getElementById('edit-pallet-row-hint').textContent = rowNum;
+
+    renderRowPicker('edit-pallet-row-picker', wh.rows, rowNum, (i) => {
+      selectedEditRow = i;
+      document.getElementById('edit-pallet-row-label').textContent = i;
+      document.getElementById('edit-pallet-row-hint').textContent = i;
+    });
+
+    document.getElementById('edit-pallet-name').value = item.name;
+    setEditDate(item.date);
+    openModal('modal-edit-pallet');
+  }
+
+  function setEditDate(iso) {
+    document.getElementById('edit-pallet-date-iso').value = iso || '';
+    const disp = document.getElementById('edit-pallet-date-display');
+    if (iso) { disp.textContent = formatDateShort(iso); disp.classList.remove('placeholder'); }
+    else { disp.textContent = 'Выберите дату'; disp.classList.add('placeholder'); }
+  }
+
+  function saveEditPallet() {
+    const name = document.getElementById('edit-pallet-name').value.trim();
+    const newRow = selectedEditRow;
+    const date = document.getElementById('edit-pallet-date-iso').value;
+    if (!name) { toast('Введите название'); return; }
+    if (!date) { toast('Выберите дату'); return; }
+    const wh = state.warehouses[editingPalletWh];
+    const oldRow = editingPalletRow;
+    const arr = wh.items[oldRow] || [];
+    const idx = arr.findIndex(x => x.id === editingPalletId);
+    if (idx === -1) { toast('Не найдено'); return; }
+    const item = arr[idx];
+    item.name = name;
+    item.date = date;
+    if (newRow !== oldRow) {
+      arr.splice(idx, 1);
+      if (!wh.items[newRow]) wh.items[newRow] = [];
+      wh.items[newRow].push(item);
+    }
+    const exists = state.products.some(p => p.name.toLowerCase() === name.toLowerCase());
+    if (!exists) state.products.push({ id: 'p_'+Date.now(), name });
+    saveState();
+    closeModal('modal-edit-pallet');
+    renderWarehouse();
+    toast('Сохранено');
+  }
+
+  function deleteEditPallet() {
+    if (!confirm('Удалить эту паллету?')) return;
+    const wh = state.warehouses[editingPalletWh];
+    const arr = wh.items[editingPalletRow] || [];
+    const idx = arr.findIndex(x => x.id === editingPalletId);
+    if (idx === -1) return;
+    arr.splice(idx, 1);
+    saveState();
+    closeModal('modal-edit-pallet');
+    renderWarehouse();
+    toast('Удалено');
+  }
+
+  let dpViewDate = new Date();
+  let dpSelected = null;
+  let dpCallback = null;
+
+  function openDatePicker(currentIso, callback) {
+    dpCallback = callback;
+    if (currentIso) {
+      dpSelected = new Date(currentIso + 'T00:00:00');
+      dpViewDate = new Date(currentIso + 'T00:00:00');
+    } else {
+      const t = new Date();
+      dpSelected = null;
+      dpViewDate = new Date(t.getFullYear(), t.getMonth(), 1);
+    }
+    renderCalendar();
+    document.getElementById('calendar-popup').classList.add('active');
+  }
+  function openPalletDatePicker() { openDatePicker(document.getElementById('pallet-date-iso').value, setPalletDate); }
+  function openEditDatePicker() { openDatePicker(document.getElementById('edit-pallet-date-iso').value, setEditDate); }
+  function openSearchDatePicker() { openDatePicker(searchDateIso, setSearchDate); }
+  function closeDatePicker() { document.getElementById('calendar-popup').classList.remove('active'); }
+  function dpPrevMonth() { dpViewDate = new Date(dpViewDate.getFullYear(), dpViewDate.getMonth() - 1, 1); renderCalendar(); }
+  function dpNextMonth() { dpViewDate = new Date(dpViewDate.getFullYear(), dpViewDate.getMonth() + 1, 1); renderCalendar(); }
+
+  function renderCalendar() {
+    const year = dpViewDate.getFullYear();
+    const month = dpViewDate.getMonth();
+    const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь',
+                        'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+    document.getElementById('dp-month').textContent = `${monthNames[month]} ${year}`;
+    const firstDay = new Date(year, month, 1);
+    const startWeekday = (firstDay.getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const prevMonthDays = new Date(year, month, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    let html = '';
+    for (let i = startWeekday - 1; i >= 0; i--) {
+      html += `<div class="dp-day other-month">${prevMonthDays - i}</div>`;
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateObj = new Date(year, month, d); dateObj.setHours(0,0,0,0);
+      const isToday = dateObj.getTime() === today.getTime();
+      const isSelected = dpSelected && dateObj.getFullYear() === dpSelected.getFullYear() && dateObj.getMonth() === dpSelected.getMonth() && dateObj.getDate() === dpSelected.getDate();
+      let cls = 'dp-day';
+      if (isToday) cls += ' today';
+      if (isSelected) cls += ' selected';
+      html += `<div class="${cls}" onclick="dpSelectDay(${year}, ${month}, ${d})">${d}</div>`;
+    }
+    const totalCells = startWeekday + daysInMonth;
+    const remaining = (7 - (totalCells % 7)) % 7;
+    for (let i = 1; i <= remaining; i++) {
+      html += `<div class="dp-day other-month">${i}</div>`;
+    }
+    document.getElementById('dp-days').innerHTML = html;
+  }
+
+  function dpSelectDay(year, month, day) {
+    const iso = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    if (dpCallback) dpCallback(iso);
+    closeDatePicker();
+  }
+  function dpToday() { const t = new Date(); dpSelectDay(t.getFullYear(), t.getMonth(), t.getDate()); }
+  function dpClear() { if (dpCallback) dpCallback(''); closeDatePicker(); }
+
+  document.getElementById('calendar-popup').addEventListener('click', (e) => {
+    if (e.target.id === 'calendar-popup') closeDatePicker();
+  });
+
+  const searchNameInput = document.getElementById('search-name');
+  const searchResultsEl = document.getElementById('search-results');
+  const searchResultsHeader = document.getElementById('search-results-header');
+  const searchResultsCount = document.getElementById('search-results-count');
+
+  function toggleSearchDate() {
+    const tile = document.getElementById('search-tile');
+    const btn = document.getElementById('search-cal-toggle');
+    tile.classList.toggle('expanded');
+    btn.classList.toggle('active');
+  }
+
+  function setSearchDate(iso) {
+    searchDateIso = iso || '';
+    const disp = document.getElementById('search-date-display');
+    if (iso) { disp.textContent = formatDateShort(iso); disp.classList.remove('placeholder'); }
+    else { disp.textContent = 'Любая дата'; disp.classList.add('placeholder'); }
+    renderSearchResults();
+  }
+
+  function clearSearch() {
+    searchNameInput.value = '';
+    searchDateIso = '';
+    const disp = document.getElementById('search-date-display');
+    disp.textContent = 'Любая дата';
+    disp.classList.add('placeholder');
+    document.getElementById('search-tile').classList.remove('expanded');
+    document.getElementById('search-cal-toggle').classList.remove('active');
+    renderSearchResults();
+  }
+
+  function performSearch() {
+    const q = searchNameInput.value.trim().toLowerCase();
+    const d = searchDateIso;
+    const results = [];
+    if (!q && !d) return results;
+    for (let w = 1; w <= 4; w++) {
+      const wh = state.warehouses[w];
+      if (!wh.items) continue;
+      Object.keys(wh.items).forEach(row => {
+        (wh.items[row] || []).forEach(item => {
+          const matchName = !q || item.name.toLowerCase().includes(q);
+          const matchDate = !d || item.date === d;
+          if (matchName && matchDate) {
+            results.push({ id: item.id, name: item.name, date: item.date, warehouse: w, row: parseInt(row) });
+          }
+        });
+      });
+    }
+    results.sort((a, b) => a.name.localeCompare(b.name, 'ru', { sensitivity: 'base' }) || (a.date || '').localeCompare(b.date || ''));
+    return results;
+  }
+
+  function renderSearchResults() {
+    const q = searchNameInput.value.trim();
+    const hasQuery = q || searchDateIso;
+    if (!hasQuery) {
+      searchResultsEl.innerHTML = '';
+      searchResultsHeader.classList.remove('visible');
+      return;
+    }
+    const results = performSearch();
+    if (results.length === 0) {
+      searchResultsEl.innerHTML = '<div class="search-no-result">Ничего не найдено</div>';
+      searchResultsHeader.classList.remove('visible');
+      return;
+    }
+
+    searchResultsHeader.classList.add('visible');
+    searchResultsCount.textContent = results.length;
+
+    const cardsHtml = results.map(r => `
+      <div class="search-result" data-wh="${r.warehouse}" data-row="${r.row}" data-item-id="${r.id}">
+        <div class="sr-name">🍷 ${escapeHtml(r.name)}<span class="sr-arrow">→</span></div>
+        <div class="sr-meta">
+          <span>🏭 Склад ${r.warehouse}</span>
+          <span>📍 Ряд ${r.row}</span>
+          ${r.date ? `<span class="sr-date">📅 ${formatDateShort(r.date)}</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+
+    searchResultsEl.innerHTML = `<div class="search-results-scroll" id="search-results-scroll">${cardsHtml}</div>`;
+
+    requestAnimationFrame(() => {
+      const scrollEl = document.getElementById('search-results-scroll');
+      if (scrollEl && scrollEl.scrollHeight <= scrollEl.clientHeight) {
+        scrollEl.classList.add('not-scrollable');
+      }
+    });
+
+    searchResultsEl.querySelectorAll('.search-result').forEach(el => {
+      el.addEventListener('click', () => {
+        const wh = parseInt(el.getAttribute('data-wh'));
+        const row = parseInt(el.getAttribute('data-row'));
+        const itemId = el.getAttribute('data-item-id');
+        openWarehouseWithHighlight(wh, row, itemId);
+      });
+    });
+  }
+
+  searchNameInput.addEventListener('input', renderSearchResults);
+
+  function sortedProducts() {
+    return [...state.products].sort((a, b) => a.name.localeCompare(b.name, 'ru', { sensitivity: 'base' }));
+  }
+
+  function renderProducts() {
+    const container = document.getElementById('products-content');
+    container.innerHTML = '';
+    const list = sortedProducts();
+    if (list.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <span class="emoji">🍷</span>
+          <p>Пока нет продукции.<br>Нажми «➕ Добавить продукцию» внизу,<br>чтобы создать первую запись.</p>
+        </div>`;
+      return;
+    }
+    list.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <div class="product-icon">🍷</div>
+        <div class="p-name">${escapeHtml(p.name)}</div>
+        <div class="p-edit">✏️</div>
+      `;
+      card.addEventListener('click', () => openEditProduct(p.id));
+      container.appendChild(card);
+    });
+  }
+
+  function openAddProduct() {
+    editingProductId = null;
+    document.getElementById('product-modal-title').textContent = '➕ Новая продукция';
+    document.getElementById('product-name-input').value = '';
+    document.getElementById('product-delete-wrap').style.display = 'none';
+    openModal('modal-product');
+    setTimeout(() => document.getElementById('product-name-input').focus(), 250);
+  }
+
+  function openEditProduct(id) {
+    const p = state.products.find(x => x.id === id);
+    if (!p) return;
+    editingProductId = id;
+    document.getElementById('product-modal-title').textContent = '✏️ Редактирование';
+    document.getElementById('product-name-input').value = p.name;
+    document.getElementById('product-delete-wrap').style.display = 'flex';
+    openModal('modal-product');
+    setTimeout(() => document.getElementById('product-name-input').focus(), 250);
+  }
+
+  function saveProduct() {
+    const name = document.getElementById('product-name-input').value.trim();
+    if (!name) { toast('Введите название'); return; }
+    if (editingProductId) {
+      const p = state.products.find(x => x.id === editingProductId);
+      if (!p) return;
+      const oldName = p.name;
+      p.name = name;
+      for (let w = 1; w <= 4; w++) {
+        const wh = state.warehouses[w];
+        if (!wh.items) continue;
+        Object.values(wh.items).forEach(arr => {
+          arr.forEach(item => { if (item.name === oldName) item.name = name; });
+        });
+      }
+      toast('Название обновлено');
+    } else {
+      const exists = state.products.some(p => p.name.toLowerCase() === name.toLowerCase());
+      if (exists) { toast('Такая продукция уже есть'); return; }
+      state.products.push({ id: 'p_'+Date.now(), name });
+      toast('Продукция добавлена');
+    }
+    saveState();
+    closeModal('modal-product');
+    renderProducts();
+  }
+
+  function deleteProduct() {
+    if (!editingProductId) return;
+    const p = state.products.find(x => x.id === editingProductId);
+    if (!p) return;
+    if (!confirm(`Удалить «${p.name}» из каталога? Паллеты на складах останутся.`)) return;
+    state.products = state.products.filter(x => x.id !== editingProductId);
+    saveState();
+    closeModal('modal-product');
+    renderProducts();
+    toast('Удалено из каталога');
+  }
+
+  let toastTimer;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  document.querySelectorAll('.modal-overlay').forEach(ov => {
+    ov.addEventListener('click', (e) => { if (e.target === ov) ov.classList.remove('active'); });
+  });
+
+  document.getElementById('product-name-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); saveProduct(); }
+  });
+  document.getElementById('pallet-name').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); savePallet(); }
+  });
+  document.getElementById('edit-pallet-name').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); saveEditPallet(); }
+  });
+
+  bindAutocomplete(document.getElementById('pallet-name'), document.getElementById('autocomplete-list'));
+  bindAutocomplete(document.getElementById('edit-pallet-name'), document.getElementById('edit-autocomplete-list'));
+
+  migrateIds();
+  saveState();
+  renderMain();
+  renderSearchResults();
+</script>
+</body>
+</html>
